@@ -1,0 +1,33 @@
+public class MyLinkedList {
+
+    private Node head;
+
+    //you do not need the constructor
+    //head will be null by default
+    public MyLinkedList() {
+	head = null;
+    }
+
+    public String toString() {
+	return "" + head;
+    }
+
+    public void add(String d) {
+	Node tmp = new Node(d);
+	tmp.setNext(head); //you must do this first
+	head = tmp; //you must do this second
+    }
+
+    public String get(int i) {
+	Node tmp = new Node;
+    }
+    public void add(int i, String s) {
+	Node tmp = new Node(s);
+	tmp.setNext(tmp.getData());	
+    }
+
+
+
+}
+
+
