@@ -3,19 +3,18 @@ import java.util.*;
 public class RPN{
   private Stack stack;
   private static final String opperators = "*/+-^%";
-    private boolean on = false;
+  
     public RPN(){
 	stack = new Stack();
     }
 
 
   public void calculate(){
-      while (on = true) {
       System.out.print("Enter input");
       Scanner sc = new Scanner(System.in);
       String input = sc.nextLine();
       if(input.equals("off")){
-        on = false;
+        on=false;
       }
       else if(input.equals("clear")){
         stack = new Stack();
@@ -27,7 +26,7 @@ public class RPN{
         System.out.println(opperate(input));
       }
 
-      }
+    }
   }
   
   public double opperate(String op){
