@@ -1,67 +1,86 @@
+import java.util.Scanner;
 import java.util.*;
+import java.io.*;
 
-public class RPN{
-  private Stack stack;
-  private static final String opperators = "*/+-^%";
-    private boolean on = false;
-    public RPN(){
-	stack = new Stack();
+public class rpn {
+    private CalcStack stack = new CalcStack();
+    public void push(String s) {
+        double d = Double.parseDouble(s);
+        stack.push(d);
     }
 
+    public void add() {
+        double result = 0;
+        if (!stack.isEmpty()) {
+            result = stack.pop();
+        }
+        if (!stack.isEmpty()) {
+            result += stack.pop();
+        }
+        stack.push(result);
+    }
 
-  public void calculate(){
-      while (on = true) {
-      System.out.print("Enter input");
-      Scanner sc = new Scanner(System.in);
-      String input = sc.nextLine();
-      if(input.equals("off")){
-        on = false;
-      }
-      else if(input.equals("clear")){
-        stack = new Stack();
-      }
-      else if(opperators.indexOf(input) ==-1){
-          stack.push(input);
-      }
-      else{
-        System.out.println(opperate(input));
-      }
+    public void subtract() {
+        double result = 0;
+        if (!stack.isEmpty()) {
+            result = stack.pop();
+        }
+        if (!stack.isEmpty()) {
+            result = stack.pop() - result;
+        }
+        stack.push(result);
+    }
 
-      }
-  }
-  
-  public double opperate(String op){
-    double b = Double.parseDouble(stack.pop());
-    double a = Double.parseDouble(stack.pop());
-    double rtn = 0;
-    if(op.equals("+")){
-      rtn = a+b;
+    public void divide() {
+        double result = 0;
+        if (!stack.isEmpty()) {
+            result = stack.pop();
+        }
+        if (!stack.isEmpty()) {
+            result = stack.pop() / result;
+        }
+        stack.push(result);
     }
-    else if(op.equals("-")){
-      rtn = a-b;
-    }
-    else if(op.equals("*")){
-      rtn = a*b;
-    }   
-    else if(op.equals("/")){
-      rtn = a/b;
-    }
-    else if(op.equals("^")){
-	rtn =Math.pow(a,b);
-    }
-    else if(op.equals("%")){
-	rtn = a%b;
-    }
-    stack.push(rtn + "");
-    return rtn;
-  }
 
+    public void multiply() {
+        double result = 0;
+        if (!stack.isEmpty()) {
+            result = stack.pop();
+        }
+        if (!stack.isEmpty()) {
+            result *= stack.pop();
+        }
+        stack.push(result);
+    }
 
-  public static void main(String[]args){
-    RPN x = new RPN();
-    x.calculate();
-    System.out.println(x.stack);
-  }
+    public double operation (String[] a) {
+        for (String s : a) {
+            if (s.equals("+")) {
+                add();
+            }
+            else if (s.equals("-")) {
+                subtract();
+            }
+            else if (s.equals("/")) {
+                divide();
+            }
+            else if (s.equals("*")) {
+                multiply();
+            }
+
+            else {
+                push(s);
+            }
+        }
+        return stack.pop();
+    }
+
+    public static void main(String[] args) {
+        rpn rpn1 = new rpn();
+        Scanner scanStr = new Scanner(System.in);
+        System.out.println("Expression :");
+        String[] input = scanStr.nextLine().split(" ");
+        System.out.println("Result: " + rpn.operation(input));
+    }
+
 }
-
-  
