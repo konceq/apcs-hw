@@ -26,6 +26,16 @@ public class BST{
 	else
 	    piggyback.setRight(n);
     }
+
+    public void transverse(Node n) {
+	if (n == null)
+	    return;
+	else{
+	    System.out.println(n.getData());
+	    transverse(n.getLeft());
+	    transverse(n.getRight()); 
+	}
+    }
     
     public Node search(int x){
 	Node temp = root;
@@ -54,13 +64,13 @@ public class BST{
        	return search2(c, x);
 
     }
-
+ 
     public void delete(Node c){
 	Node pointer = root;
 	Node piggyback = null;
-	int d = n.getData();
+	int d = c.getData();
 
-	while (pointer != d){
+	while (pointer.getData() != d){
 	    if (d < pointer.getData()){
 		piggyback = pointer;
 		pointer = pointer.getLeft();
@@ -98,6 +108,23 @@ public class BST{
 	    delete(big);
 
 	}
+
+    }
+
+    public static void main(String[] args) {
+	BST sappha = new BST();
+	Node n = new Node(3);
+	sappha.insert(n);
+	sappha.insert(new Node(5));
+	sappha.insert(new Node(13));
+	sappha.insert(new Node(63));
+	sappha.insert(new Node(43));
+	sappha.insert(new Node(14));
+	sappha.insert(new Node(8));
+	sappha.insert(new Node(3));
+	sappha.insert(new Node(1));
+	sappha.insert(new Node(21));
+	sappha.transverse(n);
 
     }
 
